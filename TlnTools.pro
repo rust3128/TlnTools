@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,14 +21,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
+win32: RC_ICONS = $$PWD/images/TlnTools.ico
+win32:{
+    VERSION = 1.0.0
+    QMAKE_TARGET_COMPANY = ТОВ Промтерминалсервис
+    QMAKE_TARGET_PRODUCT = Talons Tools
+    QMAKE_TARGET_DESCRIPTION = User tool for working with TalonsOnline
+    QMAKE_TARGET_COPYRIGHT = Ruslan Polupan
+}
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    loggingcategories.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    loggingcategories.h \
+    databases.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    resourse.qrc
+
+
+
+DISTFILES +=
