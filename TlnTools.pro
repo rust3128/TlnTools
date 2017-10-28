@@ -33,15 +33,18 @@ win32:{
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    loggingcategories.cpp
+    loggingcategories.cpp \
+    logindialog.cpp
 
 HEADERS += \
         mainwindow.h \
     loggingcategories.h \
-    databases.h
+    databases.h \
+    logindialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    logindialog.ui
 
 RESOURCES += \
     resourse.qrc

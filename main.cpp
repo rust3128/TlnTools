@@ -14,6 +14,7 @@
 
 #include "LoggingCategories.h"
 #include "databases.h"
+#include "logindialog.h"
 
 // Умный указатель на файл логирования
 QScopedPointer<QFile>   m_logFile;
@@ -46,9 +47,14 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    MainWindow w;
+    LoginDialog *loginDlg = new LoginDialog();
+    loginDlg->exec();
+    if(loginDlg->result()==QDialog::Rejected)
+        return 1;
+
+    MainWindow *w = new MainWindow(loginDlg->getUser());
     qInfo(logInfo()) << "Запуск программы.";
-    w.show();
+    w->show();
 
     return a.exec();
 }
