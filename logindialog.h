@@ -25,13 +25,14 @@ private slots:
 
     void on_lineEditPassword_textEdited();
 public:
-    QStringList getUser();
+    QSqlRecord getUser();
 private:
     Ui::LoginDialog *ui;
     QSqlQueryModel *users;
     QSqlDatabase dblite;
     int currUserID;
     QString userPass;
+    QModelIndex indexModel;
     void createUI();
     void verifyLogin();
 

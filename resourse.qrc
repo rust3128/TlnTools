@@ -2,6 +2,11 @@
     <qresource prefix="/images">
         <file>Images/TlnTools.ico</file>
         <file>Images/login.png</file>
+        <file>Images/add_user.png</file>
+        <file>Images/delete_user.png</file>
+        <file>Images/edit_user.png</file>
+        <file>Images/users.png</file>
+        <file>Images/exit.png</file>
     </qresource>
     <qresource prefix="/">
         <file>translate/qtbase_ru.qm</file>

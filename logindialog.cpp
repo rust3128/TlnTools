@@ -1,6 +1,7 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
 #include "LoggingCategories.h"
+#include <QSqlRecord>
 
 
 
@@ -22,7 +23,7 @@ void LoginDialog::createUI()
 {
     dblite = QSqlDatabase::database("lite");
     users = new QSqlQueryModel();
-    users->setQuery("select user_id, username, password from users", dblite);
+    users->setQuery("SELECT user_id, username, password, fio FROM users WHERE isactive=1", dblite);
     ui->comboBoxLogin->setModel(users);
     ui->comboBoxLogin->setModelColumn(1);
     ui->comboBoxLogin->setCurrentIndex(-1);
@@ -60,6 +61,7 @@ void LoginDialog::verifyLogin()
 void LoginDialog::on_comboBoxLogin_activated(int idx)
 {
     userPass="";
+    indexModel=users->index(idx,0,QModelIndex());
 
     currUserID=users->data(users->index(idx,0)).toInt();
     userPass=users->data(users->index(idx,2)).toString();
@@ -70,9 +72,7 @@ void LoginDialog::on_lineEditPassword_textEdited()
     ui->labelInfo->clear();
 }
 
-QStringList LoginDialog::getUser()
+QSqlRecord LoginDialog::getUser()
 {
-    QStringList user;
-    user << QString::number(currUserID) << ui->comboBoxLogin->currentText();
-    return user;
+    return users->record(indexModel.row());
 }

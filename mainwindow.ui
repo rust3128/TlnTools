@@ -23,6 +23,13 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Настройка</string>
+    </property>
+    <addaction name="actionUsers"/>
+   </widget>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,8 +40,22 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionUsers">
+   <property name="icon">
+    <iconset resource="resourse.qrc">
+     <normaloff>:/images/Images/users.png</normaloff>:/images/Images/users.png</iconset>
+   </property>
+   <property name="text">
+    <string>Пользователи</string>
+   </property>
+   <property name="statusTip">
+    <string>Менеджер пользователей.</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resourse.qrc"/>
+ </resources>
  <connections/>
 </ui>

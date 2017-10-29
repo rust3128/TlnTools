@@ -34,17 +34,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     loggingcategories.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    usersdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     loggingcategories.h \
     databases.h \
-    logindialog.h
+    logindialog.h \
+    usersdialog.h
 
 FORMS += \
         mainwindow.ui \
-    logindialog.ui
+    logindialog.ui \
+    usersdialog.ui
 
 RESOURCES += \
     resourse.qrc

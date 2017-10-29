@@ -3,6 +3,13 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QSqlRecord>
+
+struct userdata
+{
+    int id;
+    QString fio;
+};
 
 namespace Ui {
 class MainWindow;
@@ -13,14 +20,20 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QStringList user, QWidget *parent = 0);
+    explicit MainWindow(QSqlRecord user, QWidget *parent = 0);
     ~MainWindow();
+
+private slots:
+    void on_actionUsers_triggered();
 
 private:
     Ui::MainWindow *ui;
-    QStringList currentUser;
-    void infoUser2StatusBar();
+    userdata currentUser;
     QLabel *labelUser;
+
+    void infoUser2StatusBar();
+    void createUI();
+
 };
 
 #endif // MAINWINDOW_H
