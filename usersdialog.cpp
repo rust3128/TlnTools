@@ -1,5 +1,6 @@
 #include "usersdialog.h"
 #include "ui_usersdialog.h"
+#include "loggingcategories.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
@@ -21,10 +22,11 @@ UsersDialog::~UsersDialog()
 
 void UsersDialog::createUI()
 {
-//    ui->frameMapper->hide();
+    ui->frameMapper->hide();
     ui->lineEditIsAktive->hide();
     ui->lineEditIsAktive->setText("1");
     ui->pbEdit->setDisabled(true);
+    ui->pbDelete->setDisabled(true);
 
     modelUsers = new QSqlTableModel(this,dblite);
     modelUsers->setTable("users");
@@ -91,8 +93,8 @@ void UsersDialog::on_pbSave_clicked()
     q.exec();
     q.next();
     if(q.value(0) != 0 && isNew) {
-           QMessageBox::information(this, trUtf8("Ошибка имени пользователя"),
-                                    trUtf8("Пользователь с таким логином уже существует"));
+           QMessageBox::information(this, "Ошибка имени пользователя",
+                                    "Пользователь с таким логином уже существует");
     } else {
         mapper->submit();
         modelUsers->submitAll();
@@ -109,6 +111,7 @@ void UsersDialog::userSelectionChanged(QItemSelection selection)
 {
     mapper->setCurrentModelIndex(selection.indexes().first());
     ui->pbEdit->setDisabled(false);
+    ui->pbDelete->setDisabled(false);
 }
 
 void UsersDialog::on_pbEdit_clicked()
@@ -120,4 +123,29 @@ void UsersDialog::on_pbEdit_clicked()
     ui->pbDelete->setDisabled(true);
     isNew=false;
     manageData(1);
+}
+
+void UsersDialog::on_pbDelete_clicked()
+{
+    QSqlQuery q = QSqlQuery(dblite);
+    QModelIndex idx = ui->tableView->selectionModel()->currentIndex();
+    int userID = modelUsers->data(modelUsers->index(idx.row(),0)).toInt();
+    QString strSQL = QString("UPDATE users SET isactive=0 WHERE user_id='%1'")
+            .arg(userID);
+    if(!q.exec(strSQL)) {
+        qDebug(logDebug()) << "Не удалось деактивировать пользователя. Причина: "
+                           << q.lastError().text();
+        return;
+    }
+    qDebug(logInfo()) << "Пользователь " << modelUsers->data(modelUsers->index(idx.row(),1)).toString() << "деактивирован.";
+    ui->pbEdit->setDisabled(true);
+    ui->pbDelete->setDisabled(true);
+    modelUsers->select();
+    modelUsers->setFilter("isactive=1");
+
+}
+
+void UsersDialog::on_pbExit_clicked()
+{
+    this->reject();
 }

@@ -35,7 +35,7 @@ void LoginDialog::on_buttonBox_clicked(QAbstractButton *button)
 {
     switch (ui->buttonBox->standardButton(button)) {
     case QDialogButtonBox::Ok:
-        verifyLogin();
+        if(ui->comboBoxLogin->currentIndex()>=0) verifyLogin();
         break;
     case QDialogButtonBox::Cancel:
         this->reject();

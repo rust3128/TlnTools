@@ -25,6 +25,10 @@ private slots:
 
     void on_pbEdit_clicked();
 
+    void on_pbDelete_clicked();
+
+    void on_pbExit_clicked();
+
 private:
     void createUI();
     void manageData(int userID);
