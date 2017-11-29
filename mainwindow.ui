@@ -29,6 +29,13 @@
     </property>
     <addaction name="actionUsers"/>
    </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionInputNum"/>
+   </widget>
+   <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -38,6 +45,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionInputNum"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionUsers">
@@ -50,6 +58,21 @@
    </property>
    <property name="statusTip">
     <string>Менеджер пользователей.</string>
+   </property>
+  </action>
+  <action name="actionInputNum">
+   <property name="icon">
+    <iconset resource="resourse.qrc">
+     <normaloff>:/images/Images/form.png</normaloff>:/images/Images/form.png</iconset>
+   </property>
+   <property name="text">
+    <string>Номера талонов</string>
+   </property>
+   <property name="toolTip">
+    <string>Вод номеров талонов</string>
+   </property>
+   <property name="shortcut">
+    <string>Ins</string>
    </property>
   </action>
  </widget>

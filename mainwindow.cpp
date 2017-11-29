@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "usersdialog.h"
+#include "inputtalonsdialog.h"
 
 #include <QMessageBox>
 
@@ -26,6 +27,9 @@ void MainWindow::infoUser2StatusBar()
     labelUser = new QLabel(this);
     labelUser->setText("Пользователь: " + currentUser.fio);
     ui->statusBar->addPermanentWidget(labelUser);
+    labelDB = new QLabel(this);
+    labelDB->setText("Подключено с базам данных Саноил.");
+    ui->statusBar->addWidget(labelDB);
 
 }
 
@@ -43,4 +47,18 @@ void MainWindow::on_actionUsers_triggered()
 {
     UsersDialog *usersDlg = new UsersDialog();
     usersDlg->exec();
+}
+
+void MainWindow::on_actionInputNum_triggered()
+{
+    InputTalonsDialog *inTlnDlg = new InputTalonsDialog();
+    inTlnDlg->exec();
+    listTalons=inTlnDlg->talonsListReturn();
+    if(listTalons.length()==0) {
+            QMessageBox::critical(0, qApp->tr("Ошибка ввода"),
+                                  QString("Не указаны номера талонов.\n"
+                                          "Укажите заново и повторите попытку."),
+                                  QMessageBox::Ok);
+            return;
+    }
 }

@@ -34,16 +34,30 @@ int main(int argc, char *argv[])
     // Устанавливаем обработчик
     qInstallMessageHandler(messageHandler);
 
-    // Устанавливаем файл локализации
-    QTranslator *qt_translator = new QTranslator();
-    if(qt_translator->load(":/translate/qtbase_ru.qm")) {
-        a.installTranslator(qt_translator);
-    }
-    else {
+//    // Устанавливаем файл локализации
+//    QTranslator *qt_translator = new QTranslator();
+//    if(qt_translator->load(":/translate/qtbase_ru.qm")) {
+//        a.installTranslator(qt_translator);
+//    }
+//    else {
+//        qWarning(logWarning()) << "Не удалось загрузить языковый файл.";
+//    }
+
+#ifndef QT_NO_TRANSLATION
+    QString translatorFileName = QLatin1String("qt_");
+    translatorFileName += QLocale::system().name();
+    QTranslator *translator = new QTranslator(&a);
+    if (translator->load(translatorFileName, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        a.installTranslator(translator);
+    else
         qWarning(logWarning()) << "Не удалось загрузить языковый файл.";
+#endif
+
+    if(!connectionOptions()) {
+        return 1;
     }
 
-    if(!createConnection()) {
+    if(!connectToDatabases()) {
         return 1;
     }
 

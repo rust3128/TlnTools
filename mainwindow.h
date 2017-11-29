@@ -26,10 +26,14 @@ public:
 private slots:
     void on_actionUsers_triggered();
 
+    void on_actionInputNum_triggered();
+
 private:
     Ui::MainWindow *ui;
     userdata currentUser;
     QLabel *labelUser;
+    QLabel *labelDB;
+    QStringList listTalons;
 
     void infoUser2StatusBar();
     void createUI();
