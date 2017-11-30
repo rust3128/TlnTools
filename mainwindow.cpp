@@ -13,6 +13,7 @@ MainWindow::MainWindow(QSqlRecord user, QWidget *parent) :
     ui->setupUi(this);
     currentUser.id=user.value("user_id").toInt();
     currentUser.fio=user.value("fio").toString();
+    crModelSerials();
     createUI();
     infoUser2StatusBar();
 }
@@ -61,4 +62,17 @@ void MainWindow::on_actionInputNum_triggered()
                                   QMessageBox::Ok);
             return;
     }
+}
+
+void MainWindow::crModelSerials()
+{
+    QSqlDatabase dbc = QSqlDatabase::database("central");
+    modelSerials = new QSqlQueryModel();
+    QString strSql=QString("select s.CLIENT_ID, p.CLIENT_NAME,s.code, s.AMOUNT, s.REMARK "
+                               "FROM PLG$TLN_SERIALS s "
+                               "LEFT JOIN PLG$TLN_CLIENTS p ON p.CLIENT_ID=s.CLIENT_ID "
+                               "where s.CLIENT_ID IN (select a.CLIENT_ID from PLG$TLN_CLIENTS a "
+                               "where a.ISACTIVE='T') "
+                               "order by p.CLIENT_ID, s.CODE");
+    modelSerials->setQuery(strSql,dbc);
 }

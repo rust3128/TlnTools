@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QSqlRecord>
+#include <QSqlQueryModel>
 
 struct userdata
 {
@@ -34,7 +35,9 @@ private:
     QLabel *labelUser;
     QLabel *labelDB;
     QStringList listTalons;
-
+    void crModelSerials();
+    QSqlQueryModel *modelSerials;
+private:
     void infoUser2StatusBar();
     void createUI();
 
