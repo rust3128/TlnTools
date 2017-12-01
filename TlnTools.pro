@@ -36,7 +36,8 @@ SOURCES += \
     loggingcategories.cpp \
     logindialog.cpp \
     usersdialog.cpp \
-    inputtalonsdialog.cpp
+    inputtalonsdialog.cpp \
+    talonsmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS += \
     databases.h \
     logindialog.h \
     usersdialog.h \
-    inputtalonsdialog.h
+    inputtalonsdialog.h \
+    talonsmodel.h
 
 FORMS += \
         mainwindow.ui \
