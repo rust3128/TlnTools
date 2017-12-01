@@ -1,6 +1,6 @@
 #include "talonsmodel.h"
 
-TalonsModel::TalonsModel(QObject *parent) : QObject(parent)
+TalonsModel::TalonsModel(QStringList tlnList, QObject *parent) : QObject(parent)
 {
 
 }

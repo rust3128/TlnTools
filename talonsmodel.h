@@ -7,7 +7,7 @@ class TalonsModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit TalonsModel(QObject *parent = nullptr);
+    explicit TalonsModel(QStringList tlnList, QObject *parent = nullptr);
 
 signals:
 
